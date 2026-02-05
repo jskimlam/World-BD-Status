@@ -2,7 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Global BD Supply Chain | 172 Lines Absolute Full Data</title>
+    <title>Global BD Status | Created by JSKIM of LAM</title>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <style>
         :root { --primary: #1B2631; --accent: #27AE60; --current: #1A1A1B; --future: #F1C40F; --bg: #F4F6F7; }
@@ -30,7 +30,6 @@
         .badge.black { background: var(--current); }
         .badge.yellow { background: var(--future); color: #333; }
         .loss-badge { background: #E74C3C; color: white; font-weight: bold; padding: 1px 5px; border-radius: 10px; font-size: 0.6rem; position: absolute; right: 10px; top: 8px; }
-        .share-badge { background: #555; color: white; padding: 1px 4px; border-radius: 4px; font-size: 0.55rem; position: absolute; right: 10px; bottom: 8px; }
         .capa-info { color: #666; font-size: 0.62rem; margin-top: 2px; }
     </style>
 </head>
@@ -39,8 +38,8 @@
     <div id="sidebar">
         <button id="toggle-btn" onclick="document.getElementById('sidebar').classList.toggle('hidden')">📊</button>
         <div class="header" onclick="resetToGlobal()">
-            <h1 style="margin:0; font-size:0.9rem;">Global BD Status created by JS KIM OF LAM</h1>
-            <p style="margin:3px 0 0 0; font-size:0.6rem; opacity:0.7;">Verified 172 Lines | Absolute Full Data</p>
+            <h1 style="margin:0; font-size:0.9rem;">Global BD Status</h1>
+            <p style="margin:3px 0 0 0; font-size:0.6rem; opacity:0.8;">Created by JSKIM of LAM | 172 Lines Full Data</p>
         </div>
         <div class="global-cap" onclick="resetToGlobal()">
             <span style="font-size:0.62rem;">Global BD Total Capacity</span><br>
@@ -55,7 +54,6 @@
                 <div class="group-header risk-header-future" onclick="this.parentElement.classList.toggle('open')"><span>📅 FUTURE MAINT</span><span id="future-total-header"></span></div>
                 <div class="collapsible-content" id="future-risk-list"></div>
             </div>
-            <div style="background: var(--primary); color:white; padding:8px 12px; font-size:0.75rem; font-weight:bold;">🌐 ALL BD PLANTS BY REGION</div>
             <div id="region-list"></div>
         </div>
     </div>
@@ -64,11 +62,7 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-    const regionFlyTo = { 
-        "NEA": { c: [32, 122], z: 4 }, "SEA": { c: [5, 110], z: 5 }, "WE": { c: [50, 10], z: 5 }, 
-        "ME": { c: [28, 50], z: 5 }, "NA": { c: [38, -95], z: 4 }, "SA": { c: [-20, -55], z: 4 },
-        "CIS": { c: [55, 60], z: 4 }, "IND": { c: [20, 78], z: 5 }, "CE": { c: [48, 18], z: 6 }, "AFRICA": { c: [30, 31], z: 6 }
-    };
+    const regionFlyTo = { "NEA": { c: [32, 122], z: 4 }, "SEA": { c: [5, 110], z: 5 }, "WE": { c: [50, 10], z: 5 }, "ME": { c: [28, 50], z: 5 }, "NA": { c: [38, -95], z: 4 }, "SA": { c: [-20, -55], z: 4 }, "CIS": { c: [55, 60], z: 4 }, "IND": { c: [20, 78], z: 5 }, "CE": { c: [48, 18], z: 6 }, "AFRICA": { c: [30, 31], z: 6 } };
     const regionColors = { "NEA": "#1597BB", "SEA": "#27AE60", "WE": "#8E44AD", "ME": "#F39C12", "NA": "#D35400", "SA": "#7F8C8D", "CIS": "#2980B9", "IND": "#16A085", "CE": "#E67E22", "AFRICA": "#34495E" };
     
     const map = L.map('map', {zoomControl: false}).setView([20, 10], 2);
@@ -76,23 +70,18 @@
 
     let plantData = [];
 
-    // JSON 데이터 로드 함수
     async function loadData() {
         try {
             const res = await fetch('bd_data.json');
             plantData = await res.json();
             initDashboard();
-        } catch (e) { 
-            console.error("Data Load Error", e);
-            alert("bd_data.json 파일을 찾을 수 없거나 웹 서버 환경이 아닙니다.");
-        }
+        } catch (e) { console.error("Data Load Error", e); }
     }
 
     function resetToGlobal() { map.flyTo([20, 10], 2, {duration: 2.0}); }
 
     function flyWithOffset(latlng, zoom) {
-        const sidebar = document.getElementById('sidebar');
-        const offset = sidebar.classList.contains('hidden') ? 0 : 320;
+        const offset = document.getElementById('sidebar').classList.contains('hidden') ? 0 : 320;
         const target = map.project(latlng, zoom).subtract([offset / 2, 0]);
         map.flyTo(map.unproject(target, zoom), zoom, { duration: 2.0 });
     }
@@ -113,21 +102,22 @@
 
         const nested = {};
         plantData.forEach(p => {
-            const isRisk = p.status.includes('Current') || p.status.includes('Future');
             const isCurrent = p.status.includes('Current');
+            const isFuture = p.status.includes('Future');
+            const isRisk = isCurrent || isFuture;
             
-            // 리스크 업체 테두리(Stroke) 제거 지침 반영
+            // 리스크 업체 테두리 제거 지침 반영 (stroke: false)
             const m = L.circleMarker([p.lat, p.lng], {
                 radius: Math.sqrt(p.capacity) * 0.65,
-                fillColor: isCurrent ? '#1A1A1B' : (p.status.includes('Future') ? '#F1C40F' : regionColors[p.region]),
-                stroke: !isRisk, // 리스크(Black/Yellow) 마커는 테두리 없음
+                fillColor: isCurrent ? '#1A1A1B' : (isFuture ? '#F1C40F' : regionColors[p.region]),
+                stroke: !isRisk, 
                 color: '#ffffff', weight: 1.5, fillOpacity: 0.9
             }).addTo(map);
 
             const loss = calculateLoss(p);
             const share = ((p.capacity / globalTotalCapa) * 100).toFixed(2);
             let pop = `<b>${p.company}</b><br>${p.location}<br>Capa: ${p.capacity}K (${share}%)<br>Status: ${p.status}`;
-            if(p.days) pop += `<br><span style="color:red;font-weight:bold;">Loss: ${loss}K MT</span><br><small>Period: ${p.period}</small>`;
+            if(p.days) pop += `<br><span style="color:red;font-weight:bold;">Loss: ${loss}K MT</span><br><small>Period: ${p.period} (${p.days} days)</small>`;
             m.bindPopup(pop); p._m = m;
 
             if (!nested[p.region]) nested[p.region] = { capa: 0, countries: {} };
@@ -142,7 +132,8 @@
             const isCur = p.status.includes('Current');
             card.className = `plant-card ${isCur?'current-risk':(p.status.includes('Future')?'future-risk':'')}`;
             const bCol = isCur ? 'black' : (p.status.includes('Future') ? 'yellow' : '');
-            card.innerHTML = `<span class="badge ${bCol}">${p.status.split('(')[0]}</span><b>${p.company}</b><div class="capa-info">${p.capacity}K MT | ${p.days || 0} Days 정지</div>`;
+            const lossBadge = p.days ? `<span class="loss-badge">${calculateLoss(p)}K Loss</span>` : '';
+            card.innerHTML = `${lossBadge}<span class="badge ${bCol}">${p.status.split('(')[0]}</span><b>${p.company}</b><div class="capa-info">${p.capacity}K MT | ${p.days || 0} Days 정지</div>`;
             card.onclick = (e) => { e.stopPropagation(); flyWithOffset([p.lat, p.lng], 9); setTimeout(() => p._m.openPopup(), 1800); };
             return card;
         };
@@ -164,7 +155,6 @@
             document.getElementById('region-list').appendChild(rDiv);
         });
     }
-
     loadData();
 </script>
 </body>
