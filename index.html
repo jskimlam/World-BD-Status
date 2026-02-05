@@ -63,20 +63,26 @@
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
     const plantData = [
-        /* 172개 전수 데이터 - 중복 제거 완료 */
-        {"region": "NEA", "country": "KOREA, SOUTH", "company": "Hanwha TotalEnergies", "location": "Seosan", "capacity": 150, "lat": 37.05, "lng": 126.37, "status": "Maintenance (Current)", "days": 15, "period": "Jan 15 ~ Jan 31"},
-        {"region": "NEA", "country": "KOREA, SOUTH", "company": "YNCC Yeosu L2", "location": "Yeosu", "capacity": 138, "lat": 34.82, "lng": 127.66, "status": "Normal"},
-        {"region": "NA", "country": "UNITED STATES", "company": "BASF TOTAL", "location": "Port Arthur", "capacity": 410, "lat": 29.88, "lng": -93.93, "status": "Trouble (Current)", "days": 30, "period": "Jan 18 ~ Feb 18"},
-        {"region": "NEA", "country": "CHINA (MAINLAND)", "company": "Sinopec Hainan", "location": "Yangpu", "capacity": 130, "lat": 19.74, "lng": 109.18, "status": "Maintenance (Current)", "days": 15, "period": "Late Jan ~ Feb 10"},
-        {"region": "NA", "country": "UNITED STATES", "company": "TPC Houston L1", "location": "Houston", "capacity": 309, "lat": 29.71, "lng": -95.24, "status": "Trouble (Current)", "days": 180, "period": "Since Jan 7 (FM)"},
-        {"region": "NA", "country": "UNITED STATES", "company": "TPC Houston L2", "location": "Houston", "capacity": 206, "lat": 29.72, "lng": -95.25, "status": "Trouble (Current)", "days": 180, "period": "Since Jan 7 (FM)"},
-        {"region": "SEA", "country": "SINGAPORE", "company": "Shell Pulau Bukom", "location": "Pulau Bukom", "capacity": 155, "lat": 1.23, "lng": 103.77, "status": "Shutdown (Current)", "days": 365, "period": "2026 Process"},
-        {"region": "NEA", "country": "TAIWAN", "company": "Formosa Mailiao L1", "location": "Mailiao", "capacity": 176, "lat": 23.78, "lng": 120.18, "status": "Maintenance (Future)", "days": 40, "period": "Mar 15 ~ Apr 25"},
-        {"region": "NEA", "country": "TAIWAN", "company": "Formosa Mailiao L2", "location": "Mailiao", "capacity": 162, "lat": 23.79, "lng": 120.19, "status": "Maintenance (Future)", "days": 40, "period": "Mar 15 ~ Apr 25"},
-        {"region": "NEA", "country": "TAIWAN", "company": "Formosa Mailiao L3", "location": "Mailiao", "capacity": 109, "lat": 23.80, "lng": 120.20, "status": "Maintenance (Future)", "days": 40, "period": "Mar 15 ~ Apr 25"},
-        {"region": "NEA", "country": "CHINA (MAINLAND)", "company": "Sinopec Maoming L2", "location": "Maoming", "capacity": 100, "lat": 21.67, "lng": 110.93, "status": "Maintenance (Future)", "days": 35, "period": "Mar 25 ~ Apr 30"},
-        {"region": "NEA", "country": "JAPAN", "company": "Chiba BD L2", "location": "Ichihara", "capacity": 90, "lat": 35.51, "lng": 140.10, "status": "Maintenance (Future)", "days": 45, "period": "Feb 15 ~ Mar 31"},
-        /* NEA - CHINA 나머지 59개 라인 */
+        /* NEA - KOREA (16 Lines) - 좌표 보정 완료 */
+        {"region": "NEA", "country": "KOREA, SOUTH", "company": "Hanwha TotalEnergies", "location": "Seosan", "capacity": 150, "lat": 36.99, "lng": 126.43, "status": "Maintenance (Current)", "days": 15, "period": "Jan 15 ~ Jan 31"},
+        {"region": "NEA", "country": "KOREA, SOUTH", "company": "YNCC Yeosu L2", "location": "Yeosu", "capacity": 138, "lat": 34.84, "lng": 127.69, "status": "Normal"},
+        {"region": "NEA", "country": "KOREA, SOUTH", "company": "GS Caltex Yeosu", "location": "Yeosu", "capacity": 130, "lat": 34.85, "lng": 127.70, "status": "Normal"},
+        {"region": "NEA", "country": "KOREA, SOUTH", "company": "Hyundai Chemical", "location": "Seosan", "capacity": 163, "lat": 36.98, "lng": 126.44, "status": "Normal"},
+        {"region": "NEA", "country": "KOREA, SOUTH", "company": "KPIC Ulsan", "location": "Ulsan", "capacity": 150, "lat": 35.48, "lng": 129.35, "status": "Normal"},
+        {"region": "NEA", "country": "KOREA, SOUTH", "company": "Kumho Petrochem Ulsan", "location": "Ulsan", "capacity": 90, "lat": 35.49, "lng": 129.36, "status": "Normal"},
+        {"region": "NEA", "country": "KOREA, SOUTH", "company": "Kumho Petrochem Yeosu", "location": "Yeosu", "capacity": 147, "lat": 34.86, "lng": 127.71, "status": "Normal"},
+        {"region": "NEA", "country": "KOREA, SOUTH", "company": "LG Chemical Seosan L1", "location": "Seosan", "capacity": 175, "lat": 36.97, "lng": 126.45, "status": "Normal"},
+        {"region": "NEA", "country": "KOREA, SOUTH", "company": "LG Chemical Seosan L2", "location": "Seosan", "capacity": 55, "lat": 36.96, "lng": 126.46, "status": "Normal"},
+        {"region": "NEA", "country": "KOREA, SOUTH", "company": "LG Chemical Yeosu L1", "location": "Yeosu", "capacity": 160, "lat": 34.87, "lng": 127.72, "status": "Normal"},
+        {"region": "NEA", "country": "KOREA, SOUTH", "company": "LG Chemical Yeosu L2", "location": "Yeosu", "capacity": 140, "lat": 34.88, "lng": 127.73, "status": "Normal"},
+        {"region": "NEA", "country": "KOREA, SOUTH", "company": "Lotte Chemical Seosan", "location": "Seosan", "capacity": 190, "lat": 36.95, "lng": 126.47, "status": "Normal"},
+        {"region": "NEA", "country": "KOREA, SOUTH", "company": "Lotte Chemical Yeosu", "location": "Yeosu", "capacity": 160, "lat": 34.89, "lng": 127.74, "status": "Normal"},
+        {"region": "NEA", "country": "KOREA, SOUTH", "company": "S-Oil Ulsan", "location": "Ulsan", "capacity": 101, "lat": 35.47, "lng": 129.37, "status": "Normal"},
+        {"region": "NEA", "country": "KOREA, SOUTH", "company": "SK Geo Centric Ulsan", "location": "Ulsan", "capacity": 130, "lat": 35.46, "lng": 129.38, "status": "Normal"},
+        {"region": "NEA", "country": "KOREA, SOUTH", "company": "YNCC Yeosu L1", "location": "Yeosu", "capacity": 240, "lat": 34.83, "lng": 127.68, "status": "Normal"},
+
+        /* NEA - CHINA (61 Lines) */
+        {"region": "NEA", "country": "CHINA (MAINLAND)", "company": "Sinopec Hainan", "location": "Yangpu", "capacity": 130, "lat": 19.76, "lng": 109.21, "status": "Maintenance (Current)", "days": 15, "period": "Late Jan ~ Feb 10"},
         {"region": "NEA", "country": "CHINA (MAINLAND)", "company": "Bora LyondellBasell", "location": "Panjin", "capacity": 120, "lat": 40.71, "lng": 122.12, "status": "Normal"},
         {"region": "NEA", "country": "CHINA (MAINLAND)", "company": "China Sanjiang Fine Chem", "location": "Jiaxing", "capacity": 80, "lat": 30.58, "lng": 120.91, "status": "Normal"},
         {"region": "NEA", "country": "CHINA (MAINLAND)", "company": "CHN Energy Ningxia Coal", "location": "Yinchuan", "capacity": 64, "lat": 38.2, "lng": 106.52, "status": "Normal"},
@@ -119,6 +125,7 @@
         {"region": "NEA", "country": "CHINA (MAINLAND)", "company": "Sinochem Quanzhou", "location": "Quanzhou", "capacity": 120, "lat": 25.17, "lng": 118.97, "status": "Normal"},
         {"region": "NEA", "country": "CHINA (MAINLAND)", "company": "Sinopec Guangzhou", "location": "Guangzhou", "capacity": 30, "lat": 23.13, "lng": 113.26, "status": "Normal"},
         {"region": "NEA", "country": "CHINA (MAINLAND)", "company": "Sinopec Maoming L1", "location": "Maoming", "capacity": 50, "lat": 21.66, "lng": 110.92, "status": "Normal"},
+        {"region": "NEA", "country": "CHINA (MAINLAND)", "company": "Sinopec Maoming L2", "location": "Maoming", "capacity": 100, "lat": 21.67, "lng": 110.93, "status": "Maintenance (Future)", "days": 35, "period": "Mar 25 ~ Apr 30"},
         {"region": "NEA", "country": "CHINA (MAINLAND)", "company": "Sinopec Qilu L1", "location": "Zibo", "capacity": 55, "lat": 36.81, "lng": 118.06, "status": "Normal"},
         {"region": "NEA", "country": "CHINA (MAINLAND)", "company": "Sinopec Qilu L2", "location": "Zibo", "capacity": 56, "lat": 36.82, "lng": 118.07, "status": "Normal"},
         {"region": "NEA", "country": "CHINA (MAINLAND)", "company": "Sinopec SABIC Tianjin", "location": "Binhai", "capacity": 200, "lat": 38.69, "lng": 117.66, "status": "Normal"},
@@ -136,7 +143,9 @@
         {"region": "NEA", "country": "CHINA (MAINLAND)", "company": "ZPC Zhoushan L3", "location": "Zhoushan", "capacity": 250, "lat": 30.36, "lng": 122.17, "status": "Normal"},
         {"region": "NEA", "country": "CHINA (MAINLAND)", "company": "ZhongKe Guangdong", "location": "Zhanjiang", "capacity": 130, "lat": 21.03, "lng": 110.4, "status": "Normal"},
         {"region": "NEA", "country": "CHINA (MAINLAND)", "company": "Qixiang Tengda", "location": "Zibo", "capacity": 100, "lat": 36.83, "lng": 118.08, "status": "Normal"},
-        /* NEA - JAPAN 나머지 */
+
+        /* NEA - JAPAN (9 Lines) */
+        {"region": "NEA", "country": "JAPAN", "company": "Chiba BD L2", "location": "Ichihara", "capacity": 90, "lat": 35.51, "lng": 140.10, "status": "Maintenance (Future)", "days": 45, "period": "Feb 15 ~ Mar 31"},
         {"region": "NEA", "country": "JAPAN", "company": "Chiba BD L1", "location": "Ichihara", "capacity": 85, "lat": 35.5, "lng": 140.09, "status": "Normal"},
         {"region": "NEA", "country": "JAPAN", "company": "ENEOS Ichihara", "location": "Ichihara", "capacity": 130, "lat": 35.52, "lng": 140.11, "status": "Normal"},
         {"region": "NEA", "country": "JAPAN", "company": "ENEOS Kawasaki L1", "location": "Kawasaki", "capacity": 81, "lat": 35.52, "lng": 139.75, "status": "Normal"},
@@ -145,25 +154,16 @@
         {"region": "NEA", "country": "JAPAN", "company": "Eneos Materials Yokkaichi", "location": "Yokkaichi", "capacity": 148, "lat": 34.96, "lng": 136.65, "status": "Normal"},
         {"region": "NEA", "country": "JAPAN", "company": "Okayama BD Mizushima", "location": "Mizushima", "capacity": 157, "lat": 34.48, "lng": 133.72, "status": "Normal"},
         {"region": "NEA", "country": "JAPAN", "company": "Zeon Corp Shunan", "location": "Shunan", "capacity": 180, "lat": 34.05, "lng": 131.81, "status": "Normal"},
-        /* NEA - KOREA 나머지 */
-        {"region": "NEA", "country": "KOREA, SOUTH", "company": "GS Caltex Yeosu", "location": "Yeosu", "capacity": 130, "lat": 34.84, "lng": 127.68, "status": "Normal"},
-        {"region": "NEA", "country": "KOREA, SOUTH", "company": "Hyundai Chemical", "location": "Seosan", "capacity": 163, "lat": 37.06, "lng": 126.38, "status": "Normal"},
-        {"region": "NEA", "country": "KOREA, SOUTH", "company": "KPIC Ulsan", "location": "Ulsan", "capacity": 150, "lat": 35.53, "lng": 129.31, "status": "Normal"},
-        {"region": "NEA", "country": "KOREA, SOUTH", "company": "Kumho Petrochem Ulsan", "location": "Ulsan", "capacity": 90, "lat": 35.54, "lng": 129.32, "status": "Normal"},
-        {"region": "NEA", "country": "KOREA, SOUTH", "company": "Kumho Petrochem Yeosu", "location": "Yeosu", "capacity": 147, "lat": 34.85, "lng": 127.69, "status": "Normal"},
-        {"region": "NEA", "country": "KOREA, SOUTH", "company": "LG Chemical Seosan L1", "location": "Seosan", "capacity": 175, "lat": 37.03, "lng": 126.35, "status": "Normal"},
-        {"region": "NEA", "country": "KOREA, SOUTH", "company": "LG Chemical Seosan L2", "location": "Seosan", "capacity": 55, "lat": 37.04, "lng": 126.36, "status": "Normal"},
-        {"region": "NEA", "country": "KOREA, SOUTH", "company": "LG Chemical Yeosu L1", "location": "Yeosu", "capacity": 160, "lat": 34.86, "lng": 127.7, "status": "Normal"},
-        {"region": "NEA", "country": "KOREA, SOUTH", "company": "LG Chemical Yeosu L2", "location": "Yeosu", "capacity": 140, "lat": 34.87, "lng": 127.71, "status": "Normal"},
-        {"region": "NEA", "country": "KOREA, SOUTH", "company": "Lotte Chemical Seosan", "location": "Seosan", "capacity": 190, "lat": 37.02, "lng": 126.34, "status": "Normal"},
-        {"region": "NEA", "country": "KOREA, SOUTH", "company": "Lotte Chemical Yeosu", "location": "Yeosu", "capacity": 160, "lat": 34.88, "lng": 127.72, "status": "Normal"},
-        {"region": "NEA", "country": "KOREA, SOUTH", "company": "S-Oil Ulsan", "location": "Ulsan", "capacity": 101, "lat": 35.55, "lng": 129.33, "status": "Normal"},
-        {"region": "NEA", "country": "KOREA, SOUTH", "company": "SK Geo Centric Ulsan", "location": "Ulsan", "capacity": 130, "lat": 35.56, "lng": 129.34, "status": "Normal"},
-        {"region": "NEA", "country": "KOREA, SOUTH", "company": "YNCC Yeosu L1", "location": "Yeosu", "capacity": 240, "lat": 34.83, "lng": 127.67, "status": "Normal"},
-        /* TAIWAN - CPC Lin Yuan */
+
+        /* NEA - TAIWAN (5 Lines) */
+        {"region": "NEA", "country": "TAIWAN", "company": "Formosa Mailiao L1", "location": "Mailiao", "capacity": 176, "lat": 23.78, "lng": 120.18, "status": "Maintenance (Future)", "days": 40, "period": "Mar 15 ~ Apr 25"},
+        {"region": "NEA", "country": "TAIWAN", "company": "Formosa Mailiao L2", "location": "Mailiao", "capacity": 162, "lat": 23.79, "lng": 120.19, "status": "Maintenance (Future)", "days": 40, "period": "Mar 15 ~ Apr 25"},
+        {"region": "NEA", "country": "TAIWAN", "company": "Formosa Mailiao L3", "location": "Mailiao", "capacity": 109, "lat": 23.8, "lng": 120.2, "status": "Maintenance (Future)", "days": 40, "period": "Mar 15 ~ Apr 25"},
         {"region": "NEA", "country": "TAIWAN", "company": "CPC Lin Yuan L1", "location": "Lin Yuan", "capacity": 100, "lat": 22.48, "lng": 120.4, "status": "Normal"},
         {"region": "NEA", "country": "TAIWAN", "company": "CPC Lin Yuan L2", "location": "Lin Yuan", "capacity": 58, "lat": 22.49, "lng": 120.41, "status": "Normal"},
+
         /* SEA (13 Lines) */
+        {"region": "SEA", "country": "SINGAPORE", "company": "Shell Pulau Bukom", "location": "Pulau Bukom", "capacity": 155, "lat": 1.25, "lng": 103.77, "status": "Shutdown (Current)", "days": 365, "period": "2026 Process"},
         {"region": "SEA", "country": "INDONESIA", "company": "Chandra Asri", "location": "Cilegon", "capacity": 137, "lat": -6.01, "lng": 106.01, "status": "Normal"},
         {"region": "SEA", "country": "INDONESIA", "company": "Lotte Chemical ID", "location": "Cilegon", "capacity": 140, "lat": -6.02, "lng": 106.02, "status": "Normal"},
         {"region": "SEA", "country": "MALAYSIA", "company": "Lotte Titan MY", "location": "Pasir Gudang", "capacity": 100, "lat": 1.47, "lng": 103.89, "status": "Normal"},
@@ -176,11 +176,13 @@
         {"region": "SEA", "country": "THAILAND", "company": "IRPC Rayong", "location": "Mueang Rayong", "capacity": 56, "lat": 12.7, "lng": 101.3, "status": "Normal"},
         {"region": "SEA", "country": "THAILAND", "company": "PTT Global Chem", "location": "Map Ta Phut", "capacity": 75, "lat": 12.71, "lng": 101.15, "status": "Normal"},
         {"region": "SEA", "country": "VIETNAM", "company": "Long Son Petrochem", "location": "Vung Tau", "capacity": 100, "lat": 10.45, "lng": 107.13, "status": "Normal"},
+
         /* SA (4 Lines) */
         {"region": "SA", "country": "BRAZIL", "company": "Braskem Camacari L1", "location": "Camacari", "capacity": 90, "lat": -12.69, "lng": -38.33, "status": "Normal"},
         {"region": "SA", "country": "BRAZIL", "company": "Braskem Camacari L2", "location": "Camacari", "capacity": 90, "lat": -12.7, "lng": -38.34, "status": "Normal"},
         {"region": "SA", "country": "BRAZIL", "company": "Braskem Santo Andre", "location": "Santo Andre", "capacity": 80, "lat": -23.65, "lng": -46.53, "status": "Normal"},
         {"region": "SA", "country": "BRAZIL", "company": "Braskem Triunfo", "location": "Triunfo", "capacity": 220, "lat": -29.94, "lng": -51.35, "status": "Normal"},
+
         /* WE (24 Lines) */
         {"region": "WE", "country": "AUSTRIA", "company": "OMV Schwechat", "location": "Schwechat", "capacity": 70, "lat": 48.14, "lng": 16.5, "status": "Normal"},
         {"region": "WE", "country": "BELGIUM", "company": "BASF Antwerpen", "location": "Antwerp", "capacity": 155, "lat": 51.22, "lng": 4.4, "status": "Normal"},
@@ -206,7 +208,22 @@
         {"region": "WE", "country": "SPAIN", "company": "Repsol La Pobla L1", "location": "La Pobla", "capacity": 65, "lat": 41.11, "lng": 1.25, "status": "Normal"},
         {"region": "WE", "country": "SPAIN", "company": "Repsol La Pobla L2", "location": "La Pobla", "capacity": 65, "lat": 41.12, "lng": 1.26, "status": "Normal"},
         {"region": "WE", "country": "SPAIN", "company": "Repsol La Pobla L3", "location": "La Pobla", "capacity": 30, "lat": 41.13, "lng": 1.27, "status": "Normal"},
-        /* CE / CIS / IND / ME / NA */
+
+        /* NA (12 Lines) - 보정 */
+        {"region": "NA", "country": "UNITED STATES", "company": "BASF TOTAL", "location": "Port Arthur", "capacity": 410, "lat": 29.88, "lng": -93.93, "status": "Trouble (Current)", "days": 30, "period": "Jan 18 ~ Feb 18"},
+        {"region": "NA", "country": "UNITED STATES", "company": "TPC Houston L1", "location": "Houston", "capacity": 309, "lat": 29.71, "lng": -95.24, "status": "Trouble (Current)", "days": 180, "period": "Since Jan 7 (FM)"},
+        {"region": "NA", "country": "UNITED STATES", "company": "TPC Houston L2", "location": "Houston", "capacity": 206, "lat": 29.72, "lng": -95.25, "status": "Trouble (Current)", "days": 180, "period": "Since Jan 7 (FM)"},
+        {"region": "NA", "country": "CANADA", "company": "Diamond Petro Sarnia", "location": "Sarnia", "capacity": 120, "lat": 42.97, "lng": -82.4, "status": "Normal"},
+        {"region": "NA", "country": "UNITED STATES", "company": "ExxonMobil Baton Rouge", "location": "Baton Rouge", "capacity": 170, "lat": 30.45, "lng": -91.14, "status": "Normal"},
+        {"region": "NA", "country": "UNITED STATES", "company": "ExxonMobil Baytown", "location": "Baytown", "capacity": 150, "lat": 29.74, "lng": -94.97, "status": "Normal"},
+        {"region": "NA", "country": "UNITED STATES", "company": "INEOS Alvin L1", "location": "Alvin", "capacity": 60, "lat": 29.42, "lng": -95.24, "status": "Normal"},
+        {"region": "NA", "country": "UNITED STATES", "company": "INEOS Alvin L2", "location": "Alvin", "capacity": 40, "lat": 29.43, "lng": -95.25, "status": "Normal"},
+        {"region": "NA", "country": "UNITED STATES", "company": "K2 Channelview L1", "location": "Channelview", "capacity": 279, "lat": 29.81, "lng": -95.12, "status": "Normal"},
+        {"region": "NA", "country": "UNITED STATES", "company": "K2 Channelview L2", "location": "Channelview", "capacity": 113, "lat": 29.82, "lng": -95.13, "status": "Normal"},
+        {"region": "NA", "country": "UNITED STATES", "company": "Shell Deer Park", "location": "Deer Park", "capacity": 150, "lat": 29.72, "lng": -95.12, "status": "Normal"},
+        {"region": "NA", "country": "UNITED STATES", "company": "Shell Norco", "location": "Norco", "capacity": 261, "lat": 29.99, "lng": -90.41, "status": "Normal"},
+
+        /* Africa/CE/CIS/IND/ME */
         {"region": "AFRICA", "country": "EGYPT", "company": "ETHYDCO", "location": "Alexandria", "capacity": 20, "lat": 31.2, "lng": 29.91, "status": "Normal"},
         {"region": "CE", "country": "CZECHIA", "company": "Butadien Kralupy", "location": "Kralupy", "capacity": 130, "lat": 50.24, "lng": 14.31, "status": "Normal"},
         {"region": "CE", "country": "HUNGARY", "company": "MOL Petrolkemia", "location": "Tiszaujvaros", "capacity": 130, "lat": 47.92, "lng": 21.05, "status": "Normal"},
@@ -234,16 +251,7 @@
         {"region": "ME", "country": "IRAN", "company": "Persian Gulf", "location": "Bandar Assaluyeh", "capacity": 100, "lat": 27.49, "lng": 52.62, "status": "Normal"},
         {"region": "ME", "country": "IRAN", "company": "Shazand Petrochem", "location": "Arak", "capacity": 35, "lat": 34.09, "lng": 49.69, "status": "Normal"},
         {"region": "ME", "country": "IRAN", "company": "Tabriz Petrochem", "location": "Tabriz", "capacity": 17, "lat": 38.07, "lng": 46.29, "status": "Normal"},
-        {"region": "ME", "country": "SAUDI ARABIA", "company": "Petrokemya Jubail", "location": "Al Jubail", "capacity": 197, "lat": 27.01, "lng": 49.66, "status": "Normal"},
-        {"region": "NA", "country": "CANADA", "company": "Diamond Petro Sarnia", "location": "Sarnia", "capacity": 120, "lat": 42.97, "lng": -82.4, "status": "Normal"},
-        {"region": "NA", "country": "UNITED STATES", "company": "ExxonMobil Baton Rouge", "location": "Baton Rouge", "capacity": 170, "lat": 30.45, "lng": -91.14, "status": "Normal"},
-        {"region": "NA", "country": "UNITED STATES", "company": "ExxonMobil Baytown", "location": "Baytown", "capacity": 150, "lat": 29.74, "lng": -94.97, "status": "Normal"},
-        {"region": "NA", "country": "UNITED STATES", "company": "INEOS Alvin L1", "location": "Alvin", "capacity": 60, "lat": 29.42, "lng": -95.24, "status": "Normal"},
-        {"region": "NA", "country": "UNITED STATES", "company": "INEOS Alvin L2", "location": "Alvin", "capacity": 40, "lat": 29.43, "lng": -95.25, "status": "Normal"},
-        {"region": "NA", "country": "UNITED STATES", "company": "K2 Channelview L1", "location": "Channelview", "capacity": 279, "lat": 29.81, "lng": -95.12, "status": "Normal"},
-        {"region": "NA", "country": "UNITED STATES", "company": "K2 Channelview L2", "location": "Channelview", "capacity": 113, "lat": 29.82, "lng": -95.13, "status": "Normal"},
-        {"region": "NA", "country": "UNITED STATES", "company": "Shell Deer Park", "location": "Deer Park", "capacity": 150, "lat": 29.72, "lng": -95.12, "status": "Normal"},
-        {"region": "NA", "country": "UNITED STATES", "company": "Shell Norco", "location": "Norco", "capacity": 261, "lat": 29.99, "lng": -90.41, "status": "Normal"}
+        {"region": "ME", "country": "SAUDI ARABIA", "company": "Petrokemya Jubail", "location": "Al Jubail", "capacity": 197, "lat": 27.01, "lng": 49.66, "status": "Normal"}
     ];
 
     const regionFlyTo = { "NEA": { c: [32, 122], z: 4 }, "SEA": { c: [5, 110], z: 5 }, "WE": { c: [50, 10], z: 5 }, "ME": { c: [28, 50], z: 5 }, "NA": { c: [38, -95], z: 4 }, "SA": { c: [-20, -55], z: 4 }, "CIS": { c: [55, 60], z: 4 }, "IND": { c: [20, 78], z: 5 }, "CE": { c: [48, 18], z: 6 }, "AFRICA": { c: [30, 31], z: 6 } };
