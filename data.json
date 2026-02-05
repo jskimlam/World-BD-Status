@@ -170,5 +170,4 @@
   { "region": "NA", "country": "UNITED STATES", "company": "K2 Channelview L1", "location": "Channelview", "capacity": 279, "lat": 29.81, "lng": -95.12, "status": "Normal" },
   { "region": "NA", "country": "UNITED STATES", "company": "K2 Channelview L2", "location": "Channelview", "capacity": 113, "lat": 29.82, "lng": -95.13, "status": "Normal" },
   { "region": "NA", "country": "UNITED STATES", "company": "Shell Deer Park", "location": "Deer Park", "capacity": 150, "lat": 29.72, "lng": -95.12, "status": "Normal" },
-  { "region": "NA", "country": "UNITED STATES", "company": "Shell Norco", "location": "Norco", "capacity": 261, "lat": 29.99, "lng": -90.41, "status": "Normal" }
-]
+  { "region": "NA", "country": "UNITED STATES", "company": "Shell Norco", "location": "Norco", "capacity": 261, "lat": 29.99, "lng": -90.41, "status": "Normal" }]
